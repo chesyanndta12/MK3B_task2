@@ -3,20 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
-Route::view('/', 'index');
+// Redirect '/' to '/login'
+Route::get('/', function () {
+    return redirect('/login');
+});
 
+// Dashboard route
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// Profile route
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-
 require __DIR__.'/auth.php';
 
-Route::get('/', [ProductController::class, 'index'])->name('index');
-Route::get('/dashboard', [ProductController::class, 'index'])->middleware(['auth'])->name('dashboard');
-
-
+// Example ProductController route
+Route::get('/dashboard', [ProductController::class, 'index'])->name('products.index');
