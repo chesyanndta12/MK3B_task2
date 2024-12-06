@@ -9,9 +9,6 @@ Route::get('/', function () {
 });
 
 // Dashboard route
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 // Profile route
 Route::view('profile', 'profile')
@@ -21,4 +18,7 @@ Route::view('profile', 'profile')
 require __DIR__.'/auth.php';
 
 // Example ProductController route
-Route::get('/dashboard', [ProductController::class, 'index'])->name('products.index');
+Route::get('/dashboard', [ProductController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
